@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+	<!-- 专门配置各种action,dao,service等bean的配置文件 -->
+	
+	<!-- 各个action的配置======================================================================= -->
+	<bean id="homeAction" class="com.athome.webmall.home.controllers.HomeAction" scope="prototype">
+		<property name="firstCategoryService" ref="firstCategoryService"></property>
+		<property name="secondCategoryService" ref="secondCategoryService"></property>
+		<property name="productService" ref="productService"></property>
+	</bean>
+	<bean id="userAction" class="com.athome.webmall.user.controllers.UserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	<bean id="verifyCodeAction" class="com.athome.webmall.user.controllers.VerifyCodeAction" scope="prototype"></bean>
+	<bean id="firstCategoryAction" class="com.athome.webmall.category.controllers.FirstCategoryAction" scope="prototype">
+		<property name="productService" ref="productService"></property>
+	</bean>
+	<bean id="productAction" class="com.athome.webmall.product.action.ProductAction" scope="prototype">
+		<property name="productService" ref="productService"></property>
+	</bean>
+	<bean id="secondCategoryAction" class="com.athome.webmall.category.controllers.SecondCategoryAction" scope="prototype">
+		<property name="productService" ref="productService"></property>
+	</bean>
+	<bean id="cartAction" class="com.athome.webmall.cart.controllers.CartAction" scope="prototype">
+		<property name="productService" ref="productService"></property>
+	</bean>
+	<!-- 由于忘记设置orderAction的scope为prototype,导致出现了新订单覆盖原订单的错误 -->
+	<bean id="orderAction" class="com.athome.webmall.order.controllers.OrderAction" scope="prototype">
+		<property name="orderService" ref="orderService"></property>
+	</bean>
+	<bean id="adminAction" class="com.athome.webmall.admin.controllers.AdminAction" scope="prototype">
+		<property name="adminService" ref="adminService"></property>
+	</bean>
+	<bean id="adminFirstCategoryAction" class="com.athome.webmall.admin.controllers.AdminFirstCategoryAction" scope="prototype">
+		<property name="firstCategoryService" ref="firstCategoryService"></property>
+	</bean>
+	<bean id="adminSecondCategoryAction" class="com.athome.webmall.admin.controllers.AdminSecondCategoryAction" scope="prototype">
+		<property name="secondCategoryService" ref="secondCategoryService"></property>
+		<property name="firstCategoryService" ref="firstCategoryService"></property>
+	</bean>
+	<bean id="adminProductAction" class="com.athome.webmall.admin.controllers.AdminProductAction" scope="prototype">
+		<property name="productService" ref="productService"></property>
+		<property name="secondCategoryService" ref="secondCategoryService"></property>
+	</bean>
+	<bean id="adminOrderAction" class="com.athome.webmall.admin.controllers.AdminOrderAction" scope="prototype">
+		<property name="orderService" ref="orderService"></property>
+	</bean>
+	
+	<!-- 各个service的配置==================================================================== -->
+	<bean id="userService" class="com.athome.webmall.user.services.UserService">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<bean id="firstCategoryService" class="com.athome.webmall.category.services.FirstCategoryService">
+		<property name="firstCategoryDao" ref="firstCategoryDao"></property>
+	</bean>
+	<bean id="productService" class="com.athome.webmall.product.services.ProductService">
+		<property name="productDao" ref="productDao"></property>
+	</bean>
+	<bean id="secondCategoryService" class="com.athome.webmall.category.services.SecondCategoryService">
+		<property name="secondCategoryDao" ref="secondCategoryDao"></property>
+	</bean>
+	<bean id="orderService" class="com.athome.webmall.order.services.OrderService">
+		<property name="orderDao" ref="orderDao"></property>
+	</bean>
+	<bean id="adminService" class="com.athome.webmall.admin.services.AdminService">
+		<property name="adminDao" ref="adminDao"></property>
+	</bean>
+	
+	<!-- 各个dao的配置======================================================================== -->
+	<bean id="userDao" class="com.athome.webmall.user.dao.UserDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="firstCategoryDao" class="com.athome.webmall.category.dao.FirstCategoryDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="productDao" class="com.athome.webmall.product.dao.ProductDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="secondCategoryDao" class="com.athome.webmall.category.dao.SecondCategoryDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="orderDao" class="com.athome.webmall.order.dao.OrderDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="adminDao" class="com.athome.webmall.admin.dao.AdminDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+</beans>

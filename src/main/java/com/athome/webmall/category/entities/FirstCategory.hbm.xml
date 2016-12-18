@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-12 23:24:09 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.athome.webmall.category.entities.FirstCategory" table="FIRST_CATEGORY">
+        <id name="cId" type="java.lang.Integer" access="field">
+            <column name="CID" />
+            <generator class="native" />
+        </id>
+        <property name="cName" type="java.lang.String" access="field">
+            <column name="CNAME" />
+        </property>
+        <set name="secondCategorys" table="SECOND_CATEGORY" inverse="true" order-by="scid" fetch="join" lazy="false" cascade="delete">
+            <key>
+                <column name="CID" />
+            </key>
+            <one-to-many class="com.athome.webmall.category.entities.SecondCategory" />
+        </set>
+    </class>
+</hibernate-mapping>

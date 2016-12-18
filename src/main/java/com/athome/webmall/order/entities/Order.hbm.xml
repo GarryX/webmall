@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-14 15:57:42 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.athome.webmall.order.entities.Order" table="ORDERS">
+        <id name="oId" type="java.lang.Integer" access="field">
+            <column name="OID" />
+            <generator class="hilo"/>
+        </id>
+        <property name="totalBill" type="java.lang.Double">
+            <column name="TOTAL_BILL" />
+        </property>
+        <property name="orderDate" type="java.util.Date">
+            <column name="ORDER_DATE" />
+        </property>
+        <property name="state" type="java.lang.Integer">
+            <column name="STATE" />
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="ADDRESS" />
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="PHONE" />
+        </property>
+        <many-to-one name="user" lazy="false" class="com.athome.webmall.user.entities.User" fetch="join">
+            <column name="UID" />
+        </many-to-one>
+        <set name="items" table="ORDERITEMS" inverse="true" lazy="false" cascade="save-update" order-by="oiId">
+            <key>
+                <column name="OID" />
+            </key>
+            <one-to-many class="com.athome.webmall.order.entities.OrderItem" />
+        </set>
+    </class>
+</hibernate-mapping>

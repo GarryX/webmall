@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-15 20:07:56 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.athome.webmall.admin.entities.AdminUser" table="ADMINUSERS">
+        <id name="auId" type="java.lang.Integer">
+            <column name="AU_ID" />
+            <generator class="native" />
+        </id>
+        <property name="auName" type="java.lang.String">
+            <column name="AU_NAME" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+    </class>
+</hibernate-mapping>

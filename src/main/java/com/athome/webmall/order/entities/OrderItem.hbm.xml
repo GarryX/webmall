@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-14 15:57:42 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.athome.webmall.order.entities.OrderItem" table="ORDERITEMS">
+        <id name="oiId" type="java.lang.Integer">
+            <column name="OIID" />
+            <generator class="hilo" />
+        </id>
+        <property name="quantity" type="java.lang.Integer">
+            <column name="QUANTITY" />
+        </property>
+        <property name="totalSum" type="java.lang.Double">
+            <column name="TOTAL_SUM" />
+        </property>
+        <many-to-one name="product" lazy="false" class="com.athome.webmall.product.entities.Product" fetch="join">
+            <column name="PID" />
+        </many-to-one>
+        <!-- 这里要将order的lazy属性也要设置为false，否则在单独查询OrderItem又带有Order属性作为条件的时候会出现懒加载异常 -->
+        <many-to-one name="order" class="com.athome.webmall.order.entities.Order" fetch="join" lazy="false">
+            <column name="OID" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

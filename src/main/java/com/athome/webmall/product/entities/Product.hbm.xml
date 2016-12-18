@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-12 10:06:59 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.athome.webmall.product.entities.Product" table="PRODUCTS">
+        <id name="id" type="java.lang.Integer">
+            <column name="PID" />
+            <generator class="native" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="PNAME" />
+        </property>
+        <property name="marketPrice" type="java.lang.Double">
+            <column name="MARKET_PRICE" />
+        </property>
+        <property name="shopPrice" type="java.lang.Double">
+            <column name="SHOP_PRICE" />
+        </property>
+        <property name="image" type="java.lang.String">
+            <column name="PIMAGE" />
+        </property>
+        <property name="desc" type="java.lang.String">
+            <column name="PDESC" />
+        </property>
+        <property name="isHot" type="java.lang.Integer">
+            <column name="IS_HOT" />
+        </property>
+        <property name="launchDate" type="java.util.Date">
+            <column name="LAUNCH_DATE" />
+        </property>
+        <many-to-one name="secondCategory" class="com.athome.webmall.category.entities.SecondCategory" fetch="join">
+            <column name="SCID" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

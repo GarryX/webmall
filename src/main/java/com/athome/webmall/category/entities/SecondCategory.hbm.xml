@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-12 23:24:09 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.athome.webmall.category.entities.SecondCategory" table="SECOND_CATEGORY" lazy="false">
+        <id name="scId" type="java.lang.Integer">
+            <column name="SCID" />
+            <generator class="native" />
+        </id>
+        <property name="scName" type="java.lang.String">
+            <column name="SCNAME" />
+        </property>
+        <many-to-one name="firstCategory" lazy="false" class="com.athome.webmall.category.entities.FirstCategory" fetch="join">
+            <column name="CID" />
+        </many-to-one>
+        <set name="products" lazy="false" inverse="true">
+        	<key column="SCID"></key>
+        	<one-to-many class="com.athome.webmall.product.entities.Product"/>
+        </set>
+    </class>
+</hibernate-mapping>

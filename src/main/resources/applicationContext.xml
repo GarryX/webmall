@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+	<!-- 配置JDBC外部配置文件路径 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+
+	<!-- 配置Spring IOC容器扫描目标包 -->
+
+	<!-- 配置JDBC连接池dataSource属性 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="user" value="${user}"></property>
+		<property name="password" value="${password}"></property>
+		<property name="driverClass" value="${driver}"></property>
+		<property name="jdbcUrl" value="${jdbcUrl}"></property>
+		<property name="maxPoolSize" value="${maxPoolSize}"></property>
+		<property name="initialPoolSize" value="${initialPoolSize}"></property>
+	</bean>
+
+	<!-- 配置sessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<!-- 以下属性必须要加hibernate,否则将不起作用 -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+			</props>
+		</property>
+		<!-- hibernate映射文件路径 -->
+		<property name="mappingResources">
+			<list>
+				<value>com/athome/webmall/user/entities/User.hbm.xml</value>
+				<value>com/athome/webmall/category/entities/FirstCategory.hbm.xml</value>
+				<value>com/athome/webmall/product/entities/Product.hbm.xml</value>
+				<value>com/athome/webmall/category/entities/SecondCategory.hbm.xml</value>
+				<value>com/athome/webmall/order/entities/Order.hbm.xml</value>
+				<value>com/athome/webmall/order/entities/OrderItem.hbm.xml</value>
+				<value>com/athome/webmall/admin/entities//AdminUser.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 启用注解事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 配置事务切点 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<!-- 曾因此处切点路径未配置正确，导致无法获取到同步的session -->
+		<aop:pointcut expression="execution(* com.athome.webmall.*.services.*.*(..))"
+			id="txPointcut" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
+	</aop:config>
+
+</beans>
