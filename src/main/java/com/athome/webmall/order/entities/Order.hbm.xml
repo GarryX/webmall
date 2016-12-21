@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2016-5-14 15:57:42 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.athome.webmall.order.entities.Order" table="ORDERS">
+    <class name="com.athome.webmall.order.entities.Order" table="orders">
         <id name="oId" type="java.lang.Integer" access="field">
             <column name="OID" />
             <generator class="hilo"/>

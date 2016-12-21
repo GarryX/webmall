@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2016-5-12 23:24:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.athome.webmall.category.entities.SecondCategory" table="SECOND_CATEGORY" lazy="false">
+    <class name="com.athome.webmall.category.entities.SecondCategory" table="second_category" lazy="false">
         <id name="scId" type="java.lang.Integer">
             <column name="SCID" />
             <generator class="native" />

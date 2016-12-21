@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2016-5-15 20:07:56 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.athome.webmall.admin.entities.AdminUser" table="ADMINUSERS">
+    <class name="com.athome.webmall.admin.entities.AdminUser" table="adminusers">
         <id name="auId" type="java.lang.Integer">
             <column name="AU_ID" />
             <generator class="native" />

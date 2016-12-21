@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2016-5-12 23:24:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.athome.webmall.category.entities.FirstCategory" table="FIRST_CATEGORY">
+    <class name="com.athome.webmall.category.entities.FirstCategory" table="first_category">
         <id name="cId" type="java.lang.Integer" access="field">
             <column name="CID" />
             <generator class="native" />

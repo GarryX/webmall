@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2016-5-8 23:30:24 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.athome.webmall.user.entities.User" table="USERS">
+    <class name="com.athome.webmall.user.entities.User" table="users">
         <id name="id" type="java.lang.Integer">
             <column name="UID" />
             <generator class="native" />
