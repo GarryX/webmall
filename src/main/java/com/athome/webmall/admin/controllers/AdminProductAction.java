@@ -26,9 +26,11 @@ public class AdminProductAction extends ActionSupport implements ModelDriven<Pro
 	private ProductService productService;
 	private SecondCategoryService secondCategoryService;
 	private Integer pageNo = 1;
+	@SuppressWarnings("unused")
 	private Integer id;
 	private File upload;
 	private String uploadFileName;
+	@SuppressWarnings("unused")
 	private String uploadContentType;
 
 	public void setUpload(File upload) {

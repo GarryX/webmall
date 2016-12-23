@@ -1,5 +1,8 @@
 package com.athome.webmall.category.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.athome.webmall.category.entities.FirstCategory;
 import com.athome.webmall.product.entities.Page;
 import com.athome.webmall.product.entities.Product;
@@ -13,6 +16,7 @@ import com.opensymphony.xwork2.ModelDriven;
  */
 public class FirstCategoryAction extends ActionSupport implements ModelDriven<FirstCategory> {
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = LoggerFactory.getLogger(FirstCategoryAction.class);
 	private FirstCategory firstCategory = new FirstCategory();
 	private ProductService productService;
 	private Integer cId;
@@ -21,7 +25,7 @@ public class FirstCategoryAction extends ActionSupport implements ModelDriven<Fi
 	public void setCId(Integer cId) {
 		this.cId = cId;
 	}
-	
+
 	public Integer getCId() {
 		return cId;
 	}
@@ -35,7 +39,8 @@ public class FirstCategoryAction extends ActionSupport implements ModelDriven<Fi
 	}
 
 	public String getById() {
-		Page<Product> page = productService.getPageByCId(cId, pageNo);//根据一级分类分页查询商品
+		Page<Product> page = productService.getPageByCId(cId, pageNo);// 根据一级分类分页查询商品
+		log.info("---page item size is: " + page.getList().size());
 		ActionContext.getContext().getValueStack().set("page", page);
 		return "productList";
 	}

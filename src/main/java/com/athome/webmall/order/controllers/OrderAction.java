@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.apache.struts2.ServletActionContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.athome.webmall.cart.entities.Cart;
 import com.athome.webmall.cart.entities.CartItem;
@@ -21,6 +23,7 @@ import com.opensymphony.xwork2.ModelDriven;
  * Order模块Controller
  */
 public class OrderAction extends ActionSupport implements ModelDriven<Order> {
+	private static final Logger log = LoggerFactory.getLogger(OrderAction.class);
 	private static final long serialVersionUID = 1L;
 	private Order order = new Order();
 	private OrderService orderService;
@@ -56,6 +59,7 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 	}
 
 	public String generateOrder() {
+		log.info("---start generate a order---");
 		Cart cart = (Cart) ServletActionContext.getRequest().getSession().getAttribute("cart");
 		if (cart == null) {
 			this.addActionError("您还没有购物，请先购物！");
@@ -65,6 +69,7 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		order.setState(PRE_PAYMENT);
 		order.setTotalBill(cart.getTotalBill());
 		User loginUser = (User) ServletActionContext.getRequest().getSession().getAttribute("loginUser");
+		log.warn("login user is: " + loginUser);
 		if (loginUser == null) {
 			this.addActionError("用户未登陆，请登陆后继续提交订单！");
 			return "loginPage";
@@ -82,6 +87,7 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		cart.clearCart();
 		// ServletActionContext.getRequest().getSession().setAttribute("order",
 		// order);
+		log.info("---end generate a order---");
 		return "orderPage";
 	}
 

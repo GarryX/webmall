@@ -2,6 +2,9 @@ package com.athome.webmall.home.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.athome.webmall.category.entities.FirstCategory;
 import com.athome.webmall.category.services.FirstCategoryService;
 import com.athome.webmall.category.services.SecondCategoryService;
@@ -11,6 +14,8 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class HomeAction extends ActionSupport {
+	
+	private static final Logger log = LoggerFactory.getLogger(HomeAction.class);
 
 	private static final long serialVersionUID = 1L;
 	/**
@@ -25,6 +30,7 @@ public class HomeAction extends ActionSupport {
 	/**
 	 * 注入SecondCategoryService实例
 	 */
+	@SuppressWarnings("unused")
 	private SecondCategoryService secondCategoryService;
 
 	public void setSecondCategoryService(SecondCategoryService secondCategoryService) {
@@ -44,6 +50,7 @@ public class HomeAction extends ActionSupport {
 	 * 转发到首页
 	 */
 	public String execute() {
+		log.info("---start HomeAction's excute method---");
 		//查询所有一级分类
 		List<FirstCategory> fclist = firstCategoryService.getAll();
 		//将查询到的一级分类集合保存到session域中
@@ -56,6 +63,7 @@ public class HomeAction extends ActionSupport {
 		List<Product> latestList = productService.getLatestProducts();
 		//将查询到的最新商品保存到值栈中
 		ActionContext.getContext().getValueStack().set("latestList", latestList);
+		log.info("---end HomeAction's excute method---");
 		return "home";
 	}
 

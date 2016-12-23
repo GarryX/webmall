@@ -6,8 +6,12 @@
 	<display-name>webmall</display-name>
 	<context-param>
 		<param-name>diskPath</param-name>
-		<param-value>F:/EcJava/webmall</param-value>
+		<param-value>/home/garry/web/webmall</param-value>
 	</context-param>
+	<!-- 配置log4j配置文件监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

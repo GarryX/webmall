@@ -1,5 +1,8 @@
 package com.athome.webmall.category.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.athome.webmall.product.entities.Page;
 import com.athome.webmall.product.entities.Product;
 import com.athome.webmall.product.services.ProductService;
@@ -9,6 +12,7 @@ import com.opensymphony.xwork2.ModelDriven;
 
 public class SecondCategoryAction extends ActionSupport implements ModelDriven<Product> {
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = LoggerFactory.getLogger(SecondCategoryAction.class);
 	private Product product = new Product();
 	private Integer scId;
 	private Integer pageNo;
@@ -42,6 +46,7 @@ public class SecondCategoryAction extends ActionSupport implements ModelDriven<P
 	public String getById() {
 		Page<Product> page = productService.getByScId(scId, pageNo);
 		ActionContext.getContext().getValueStack().set("page", page);
+		log.info("---page item size is: " + page.getList().size());
 		return "productList";
 	}
 

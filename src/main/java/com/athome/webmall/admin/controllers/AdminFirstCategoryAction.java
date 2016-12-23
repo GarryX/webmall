@@ -2,8 +2,6 @@ package com.athome.webmall.admin.controllers;
 
 import java.util.List;
 
-import org.apache.struts2.ServletActionContext;
-
 import com.athome.webmall.category.entities.FirstCategory;
 import com.athome.webmall.category.services.FirstCategoryService;
 import com.opensymphony.xwork2.ActionContext;
@@ -48,6 +46,7 @@ public class AdminFirstCategoryAction extends ActionSupport implements ModelDriv
 		return "deleted";
 	}
 
+	@SuppressWarnings("unused")
 	public String edit() {
 		FirstCategory fc = firstCategoryService.getById(firstCategory.getCId());
 		return "editPage";

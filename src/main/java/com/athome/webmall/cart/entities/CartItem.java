@@ -8,6 +8,7 @@ import com.athome.webmall.product.entities.Product;
 public class CartItem {
 	private Product product; // 购物项中的商品对象
 	private Integer quantity; // 购物项的数量
+	@SuppressWarnings("unused")
 	private Double totalSum; // 购物项的总金额
 
 	public Product getProduct() {
